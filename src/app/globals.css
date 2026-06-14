@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== DESIGN SYSTEM — CSS VARIABLES ===== */
+:root {
+  --color-bg: #050505;
+  --color-surface: #111111;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-gold: #D4AF37;
+  --color-gold-soft: #F6E27A;
+  --color-gold-glow: rgba(212, 175, 55, 0.15);
+  --color-gold-border: rgba(212, 175, 55, 0.25);
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #A1A1AA;
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  /* Typography Scale — Fluid Clamp */
+  --text-display: clamp(2.8rem, 6vw, 5.5rem);
+  --text-h1: clamp(2.5rem, 5vw, 4.5rem);
+  --text-h2: clamp(1.5rem, 2.5vw, 2.2rem);
+  --text-body: clamp(0.9rem, 1.2vw, 1.05rem);
+  --text-label: 0.72rem;
+  --text-mono: 0.68rem;
+
+  /* Typography Scale — Fluid Clamp */
+}
+
+/* ===== BASE RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  scroll-behavior: auto; /* Lenis handles smooth scroll — don't double up */
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: var(--color-bg);
+}
+
+/* Hide scrollbar */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Text selection */
+::selection {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* Custom cursor — hide default on hover-capable devices */
+@media (hover: hover) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* ===== GLASS MORPHISM ===== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.06),
+              0 20px 60px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+}
+
+/* ===== TYPOGRAPHY UTILITY CLASSES ===== */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-elegant {
+  font-family: var(--font-elegant);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-display {
+  font-size: var(--text-display);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+}
+
+.text-h1 {
+  font-size: var(--text-h1);
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.text-h2 {
+  font-size: var(--text-h2);
+}
+
+.text-body {
+  font-size: var(--text-body);
+  font-family: var(--font-body);
+  font-weight: 300;
+}
+
+.text-label {
+  font-size: var(--text-label);
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.text-mono {
+  font-size: var(--text-mono);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+
+/* ===== HUD LABEL ===== */
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ===== STATUS PULSE DOT ===== */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.pulse-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
+  animation: pulse-dot 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* ===== SCROLL INDICATOR PULSE ===== */
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+}
+
+/* ===== CERTIFICATE CARDS ===== */
+.cert-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg,
+    rgba(17, 17, 17, 0.98) 0%,
+    rgba(25, 22, 10, 0.95) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 2px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-card:hover {
+  transform: perspective(1200px) rotateX(-4deg) translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow:
+    inset 0 0 40px rgba(212, 175, 55, 0.04),
+    0 0 0 1px rgba(212, 175, 55, 0.12),
+    0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* Corner bracket accents */
+.cert-card::before,
+.cert-card::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transition: border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-card::before {
+  top: 8px;
+  left: 8px;
+  border-top: 1px solid rgba(212, 175, 55, 0.6);
+  border-left: 1px solid rgba(212, 175, 55, 0.6);
+}
+
+.cert-card::after {
+  top: 8px;
+  right: 8px;
+  border-top: 1px solid rgba(212, 175, 55, 0.6);
+  border-right: 1px solid rgba(212, 175, 55, 0.6);
+}
+
+.cert-card-bottom-left,
+.cert-card-bottom-right {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transition: border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-card-bottom-left {
+  bottom: 8px;
+  left: 8px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.6);
+  border-left: 1px solid rgba(212, 175, 55, 0.6);
+}
+
+.cert-card-bottom-right {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.6);
+  border-right: 1px solid rgba(212, 175, 55, 0.6);
+}
+
+.cert-card:hover::before,
+.cert-card:hover::after,
+.cert-card:hover .cert-card-bottom-left,
+.cert-card:hover .cert-card-bottom-right {
+  border-color: rgba(212, 175, 55, 0.9);
+}
+
+/* ===== SKILL TAG ===== */
+.skill-tag {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  padding: 3px 10px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  transition: all 0.25s ease;
+}
+
+.skill-tag:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  color: var(--color-text-primary);
+}
+
+/* ===== PROFICIENCY BAR ===== */
+.proficiency-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.proficiency-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--color-gold), var(--color-gold-soft));
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+  transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== CONTAINER ===== */
+.container-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+/* ===== SECTION SPACING ===== */
+.section-padding {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+/* ===== GOLD MICRO DIVIDER ===== */
+.gold-micro-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(to right, var(--color-gold), transparent);
+}
+
+/* ===== MAGNETIC BUTTON BASE ===== */
+.magnetic-link {
+  position: relative;
+  display: inline-block;
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.magnetic-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.magnetic-link:hover::after {
+  width: 100%;
+}
+
+.magnetic-link:hover {
+  color: var(--color-gold);
+}
+
+/* =========================================================
+   3D POEM ANIMATION KEYFRAMES
+   ========================================================= */
+@keyframes left {
+  100% {
+    margin-left: -54000px;
+  }
+}
+
+@keyframes back {
+  100% {
+    margin-left: -54870px;
+  }
+}
+
+@keyframes right {
+  100% {
+    margin-left: -55740px;
+  }
+}
+
+@keyframes filter-animation {
+  0%, 100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(100deg);
+  }
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2.5);
+  }
+}
+
+@keyframes blur {
+  0% {
+    filter: blur(0px);
+  }
+  100% {
+    filter: blur(3px);
+  }
+}
+
+@keyframes brightness {
+  0% {
+    filter: brightness(1) contrast(1);
+  }
+  100% {
+    filter: brightness(0.8) contrast(1.3);
+  }
+}
+
+@keyframes text-glow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+}
